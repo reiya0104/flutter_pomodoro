@@ -1,4 +1,5 @@
 import 'package:flutter_pomodoro/main.dart';
+import 'package:flutter_pomodoro/widgets/donut_chart.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -13,5 +14,8 @@ void main() {
 
     // stop button
     expect(find.text('stop'), findsOneWidget);
+
+    // donut chart
+    expect(find.byType(DonutChart), findsOneWidget);
   });
 }
