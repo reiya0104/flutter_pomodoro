@@ -16,19 +16,19 @@ class FlutterPomodoroApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const AppPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class AppPage extends StatefulWidget {
+  const AppPage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<AppPage> createState() => _AppPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _AppPageState extends State<AppPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
