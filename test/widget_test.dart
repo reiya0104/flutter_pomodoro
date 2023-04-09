@@ -13,7 +13,10 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const FlutterPomodoroApp());
 
-    // Verify that our counter starts at 0.
+    // clock
     expect(find.text('00:00'), findsOneWidget);
+
+    // start button
+    expect(find.text('start'), findsOneWidget);
   });
 }
