@@ -6,7 +6,7 @@ void main() {
     await tester.pumpWidget(const FlutterPomodoroApp());
 
     // clock
-    expect(find.text('00:00'), findsOneWidget);
+    expect(find.text('25:00'), findsOneWidget);
 
     // start button
     expect(find.text('start'), findsOneWidget);
