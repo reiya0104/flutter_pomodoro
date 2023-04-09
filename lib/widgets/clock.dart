@@ -13,9 +13,8 @@ class Clock extends StatelessWidget {
         DonutChart(
           chartRadius: 150,
           chartDataList: [
-            ChartData(color: Colors.blue, value: 1.1),
+            ChartData(color: Colors.blue, value: 1.0),
             ChartData(color: Colors.grey, value: 0.0),
-            ChartData(color: Colors.black, value: 0.0),
           ],
           chartStrokeWidth: 10,
         ),
