@@ -37,10 +37,16 @@ class _AppPageState extends State<AppPage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Clock(),
-            StartButton(),
-            StopButton(),
+          children: <Widget>[
+            const Clock(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const <Widget>[
+                StartButton(),
+                SizedBox(width: 50),
+                StopButton(),
+              ],
+            )
           ],
         ),
       ),
