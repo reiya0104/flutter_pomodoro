@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pomodoro/widgets/clock.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,11 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '00:00',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+          children: const <Widget>[
+            Clock(),
           ],
         ),
       ),
