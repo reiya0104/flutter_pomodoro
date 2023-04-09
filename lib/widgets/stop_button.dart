@@ -5,9 +5,9 @@ class StopButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      child: const Text(
+    return const ElevatedButton(
+      onPressed: null,
+      child: Text(
         'stop',
         style: TextStyle(fontSize: 25),
       ),
