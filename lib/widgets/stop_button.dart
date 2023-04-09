@@ -5,9 +5,12 @@ class StopButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ElevatedButton(
+    return ElevatedButton(
       onPressed: null,
-      child: Text(
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.fromLTRB(15, 12, 15, 12),
+      ),
+      child: const Text(
         'stop',
         style: TextStyle(fontSize: 25),
       ),
