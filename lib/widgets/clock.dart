@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pomodoro/models/dount_chart/chart_data.dart';
 import 'package:flutter_pomodoro/widgets/donut_chart.dart';
 
 class Clock extends StatelessWidget {

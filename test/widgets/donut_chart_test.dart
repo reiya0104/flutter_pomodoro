@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_pomodoro/models/dount_chart/chart_data.dart';
+import 'package:flutter_pomodoro/models/dount_chart/dount_painter.dart';
 import 'package:flutter_pomodoro/widgets/donut_chart.dart';
 import 'package:flutter_test/flutter_test.dart';
 
