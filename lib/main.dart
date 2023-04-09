@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pomodoro/widgets/clock.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const FlutterPomodoroApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FlutterPomodoroApp extends StatelessWidget {
+  const FlutterPomodoroApp({super.key});
 
   // This widget is the root of your application.
   @override
