@@ -6,7 +6,7 @@ class Clock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '00:00',
+      '25:00',
       style: Theme.of(context).textTheme.headlineMedium,
     );
   }
