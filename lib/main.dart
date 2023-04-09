@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pomodoro/widgets/clock.dart';
 import 'package:flutter_pomodoro/widgets/start_button.dart';
+import 'package:flutter_pomodoro/widgets/stop_button.dart';
 
 void main() {
   runApp(const FlutterPomodoroApp());
@@ -39,6 +40,7 @@ class _AppPageState extends State<AppPage> {
           children: const <Widget>[
             Clock(),
             StartButton(),
+            StopButton(),
           ],
         ),
       ),
