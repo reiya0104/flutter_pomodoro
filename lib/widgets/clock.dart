@@ -20,7 +20,7 @@ class Clock extends StatelessWidget {
         ),
         Text(
           '25:00',
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.headlineLarge,
         )
       ],
     );
