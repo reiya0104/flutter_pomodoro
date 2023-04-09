@@ -9,5 +9,7 @@ void main() {
     ));
 
     expect(find.text('start'), findsOneWidget);
+    expect(find.byWidgetPredicate((widget) => widget is ElevatedButton),
+        findsOneWidget);
   });
 }
