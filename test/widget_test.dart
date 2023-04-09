@@ -10,5 +10,8 @@ void main() {
 
     // start button
     expect(find.text('start'), findsOneWidget);
+
+    // stop button
+    expect(find.text('stop'), findsOneWidget);
   });
 }
