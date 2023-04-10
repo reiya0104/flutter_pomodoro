@@ -15,6 +15,9 @@ void main() {
     // stop button
     expect(find.text('stop'), findsOneWidget);
 
+    // reset button
+    expect(find.text('reset'), findsOneWidget);
+
     // donut chart
     expect(find.byType(DonutChart), findsOneWidget);
   });
