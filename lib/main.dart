@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pomodoro/widgets/clock.dart';
+import 'package:flutter_pomodoro/widgets/reset_button.dart';
 import 'package:flutter_pomodoro/widgets/start_button.dart';
 import 'package:flutter_pomodoro/widgets/stop_button.dart';
 
@@ -47,7 +48,9 @@ class _AppPageState extends State<AppPage> {
                 SizedBox(width: 50),
                 StopButton(),
               ],
-            )
+            ),
+            const SizedBox(height: 30),
+            const ResetButton(),
           ],
         ),
       ),
