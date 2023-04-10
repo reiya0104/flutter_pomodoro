@@ -12,6 +12,7 @@ class TimerDial extends StatefulWidget {
 class _TimerDialState extends State<TimerDial> {
   static const int startSeconds = 25 * 60;
   int _remainingSeconds = startSeconds;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -21,7 +22,7 @@ class _TimerDialState extends State<TimerDial> {
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
-    Timer.periodic(oneSec, (Timer timer) {
+    _timer = Timer.periodic(oneSec, (Timer timer) {
       if (_remainingSeconds == 0) {
         timer.cancel();
       } else {
@@ -47,5 +48,11 @@ class _TimerDialState extends State<TimerDial> {
       remainingTime,
       style: Theme.of(context).textTheme.headlineLarge,
     );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }
