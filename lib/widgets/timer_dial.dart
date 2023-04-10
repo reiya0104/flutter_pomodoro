@@ -1,17 +1,25 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_pomodoro/models/timer_mode.dart';
 
 class TimerDial extends StatefulWidget {
-  const TimerDial({super.key});
+  final TimerMode timerMode;
+
+  const TimerDial({Key? key, required this.timerMode}) : super(key: key);
 
   @override
   State<TimerDial> createState() => _TimerDialState();
 }
 
 class _TimerDialState extends State<TimerDial> {
-  static const int startSeconds = 25 * 60;
-  int _remainingSeconds = startSeconds;
+  static const Map<TimerMode, int> _initialSeconds = {
+    TimerMode.work: 25 * 60,
+    TimerMode.shortBreak: 5 * 60,
+  };
+
+  late int _remainingSeconds = _initialSeconds[widget.timerMode]!;
+
   Timer? _timer;
 
   @override

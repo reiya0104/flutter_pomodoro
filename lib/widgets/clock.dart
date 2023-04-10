@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pomodoro/models/dount_chart/chart_data.dart';
+import 'package:flutter_pomodoro/models/timer_mode.dart';
 import 'package:flutter_pomodoro/widgets/donut_chart.dart';
 import 'package:flutter_pomodoro/widgets/timer_dial.dart';
 
@@ -19,7 +20,9 @@ class Clock extends StatelessWidget {
           ],
           chartStrokeWidth: 10,
         ),
-        const TimerDial(),
+        const TimerDial(
+          timerMode: TimerMode.work,
+        ),
       ],
     );
   }
