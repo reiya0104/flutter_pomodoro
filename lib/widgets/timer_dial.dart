@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_pomodoro/models/timer_loop.dart';
 import 'package:flutter_pomodoro/models/timer_mode.dart';
 
 class TimerDial extends StatefulWidget {
@@ -11,47 +10,32 @@ class TimerDial extends StatefulWidget {
 }
 
 class _TimerDialState extends State<TimerDial> {
-  static const Map<TimerMode, int> _initialSeconds = {
-    TimerMode.work: 25 * 60,
-    TimerMode.shortBreak: 5 * 60,
-  };
-
-  late TimerMode _timerMode;
-
-  late int _remainingSeconds;
-
-  Timer? _timer;
+  late TimerLoop _timerLoop;
 
   @override
   void initState() {
     super.initState();
 
-    _timerMode = TimerMode.work;
-    _setRemainingSeconds();
-
-    startTimer();
-  }
-
-  void _setRemainingSeconds() {
-    _remainingSeconds = _initialSeconds[_timerMode]!;
-  }
-
-  void startTimer() {
-    const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(oneSec, (Timer timer) {
-      if (_remainingSeconds == 0) {
-        endTimer();
-      } else {
-        setState(() {
-          _remainingSeconds--;
+    _timerLoop = TimerLoop(
+        timerMode: TimerMode.work,
+        onTick: () {
+          if (_timerLoop.remainingSeconds == 0) {
+            _timerLoop.switchAndRestart();
+          } else {
+            setState(() {
+              _timerLoop.decrementRemainingSeconds();
+            });
+          }
+        },
+        onEnd: () {
+          setState(() {});
         });
-      }
-    });
+    _timerLoop.start();
   }
 
   String getRemainingTime() {
-    int remainingMinutes = _remainingSeconds ~/ 60;
-    int remainingSeconds = _remainingSeconds % 60;
+    int remainingMinutes = _timerLoop.remainingSeconds ~/ 60;
+    int remainingSeconds = _timerLoop.remainingSeconds % 60;
     String remainingTime =
         '${remainingMinutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
     return remainingTime;
@@ -68,24 +52,7 @@ class _TimerDialState extends State<TimerDial> {
 
   @override
   void dispose() {
-    _timer?.cancel();
+    _timerLoop.dispose();
     super.dispose();
-  }
-
-  void endTimer() {
-    // タイマーのモードを切り替えて再スタート
-
-    _timer?.cancel();
-
-    if (_timerMode == TimerMode.work) {
-      _timerMode = TimerMode.shortBreak;
-    } else {
-      _timerMode = TimerMode.work;
-    }
-
-    _setRemainingSeconds();
-
-    setState(() {});
-    startTimer();
   }
 }
