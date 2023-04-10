@@ -1,0 +1,4 @@
+enum TimerMode {
+  work,
+  shortBreak,
+}
