@@ -16,17 +16,13 @@ class TimerLoop {
     required VoidCallback onEnd,
   }) {
     _timerMode = timerMode;
-    _remainingSeconds = _getInitialSeconds();
+    _remainingSeconds = initialSeconds[_timerMode]!;
     _onTick = onTick;
     _onEnd = onEnd;
   }
 
   int get remainingSeconds => _remainingSeconds;
   TimerMode get timerMode => _timerMode;
-
-  int _getInitialSeconds() {
-    return initialSeconds[_timerMode]!;
-  }
 
   void decrementRemainingSeconds() {
     _remainingSeconds--;
@@ -48,7 +44,7 @@ class TimerLoop {
       _timerMode = TimerMode.work;
     }
 
-    _remainingSeconds = _getInitialSeconds();
+    _remainingSeconds = initialSeconds[_timerMode]!;
 
     // setState(() {}) を呼び出す
     _onEnd();
