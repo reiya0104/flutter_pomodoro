@@ -3,9 +3,14 @@ import 'package:flutter_pomodoro/models/dount_chart/chart_data.dart';
 import 'package:flutter_pomodoro/widgets/dounut_chart/donut_chart.dart';
 import 'package:flutter_pomodoro/widgets/timer_dial.dart';
 
-class Clock extends StatelessWidget {
-  const Clock({super.key});
+class Clock extends StatefulWidget {
+  const Clock({Key? key}) : super(key: key);
 
+  @override
+  State<Clock> createState() => _ClockState();
+}
+
+class _ClockState extends State<Clock> {
   @override
   Widget build(BuildContext context) {
     return Stack(
