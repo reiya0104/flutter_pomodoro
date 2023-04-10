@@ -8,7 +8,9 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TimerDial(),
+          home: TimerDial(
+            remainingSeconds: 25 * 60,
+          ),
         ),
       );
       expect(find.text('25:00'), findsOneWidget);
@@ -18,7 +20,9 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TimerDial(),
+          home: TimerDial(
+            remainingSeconds: 25 * 60 - 1,
+          ),
         ),
       );
       await tester.pump(const Duration(seconds: 1));
@@ -29,7 +33,9 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TimerDial(),
+          home: TimerDial(
+            remainingSeconds: 0,
+          ),
         ),
       );
       await tester.pump(const Duration(minutes: 25));
@@ -41,7 +47,9 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TimerDial(),
+          home: TimerDial(
+            remainingSeconds: 5 * 60,
+          ),
         ),
       );
       await tester.pump(const Duration(minutes: 25, seconds: 1));
@@ -53,7 +61,9 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TimerDial(),
+          home: TimerDial(
+            remainingSeconds: 0,
+          ),
         ),
       );
       await tester.pump(const Duration(minutes: 30, seconds: 1));
@@ -65,7 +75,9 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TimerDial(),
+          home: TimerDial(
+            remainingSeconds: 25 * 60,
+          ),
         ),
       );
       await tester.pump(const Duration(minutes: 30, seconds: 2));
