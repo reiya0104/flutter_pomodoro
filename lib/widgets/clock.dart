@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pomodoro/models/dount_chart/chart_data.dart';
 import 'package:flutter_pomodoro/models/timer_loop.dart';
 import 'package:flutter_pomodoro/models/timer_mode.dart';
-import 'package:flutter_pomodoro/widgets/dounut_chart/donut_chart.dart';
+import 'package:flutter_pomodoro/widgets/dounut_chart/dount_timer.dart';
 import 'package:flutter_pomodoro/widgets/timer_dial.dart';
 
 class Clock extends StatefulWidget {
@@ -38,19 +37,17 @@ class _ClockState extends State<Clock> {
 
   @override
   Widget build(BuildContext context) {
+    int remainingSeconds = _timerLoop.remainingSeconds;
+    TimerMode timerMode = _timerLoop.timerMode;
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
-        DonutChart(
-          chartRadius: 150,
-          chartDataList: [
-            ChartData(color: Colors.blue, value: 1.0),
-            ChartData(color: Colors.grey, value: 0.0),
-          ],
-          chartStrokeWidth: 10,
+        DountTimer(
+          remainingSeconds: remainingSeconds,
+          timerMode: timerMode,
         ),
         TimerDial(
-          remainingSeconds: _timerLoop.remainingSeconds,
+          remainingSeconds: remainingSeconds,
         ),
       ],
     );
