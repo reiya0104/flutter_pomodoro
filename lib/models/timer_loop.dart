@@ -24,13 +24,8 @@ class TimerLoop {
   int get remainingSeconds => _remainingSeconds;
   TimerMode get timerMode => _timerMode;
 
-  static const Map<TimerMode, int> _initialSeconds = {
-    TimerMode.work: 25 * 60,
-    TimerMode.shortBreak: 5 * 60,
-  };
-
   int _getInitialSeconds() {
-    return _initialSeconds[_timerMode]!;
+    return initialSeconds[_timerMode]!;
   }
 
   void decrementRemainingSeconds() {
