@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pomodoro/models/timer_mode.dart';
 
 class TimerDial extends StatefulWidget {
-  final TimerMode timerMode;
-
-  const TimerDial({Key? key, required this.timerMode}) : super(key: key);
+  const TimerDial({Key? key}) : super(key: key);
 
   @override
   State<TimerDial> createState() => _TimerDialState();
@@ -18,21 +16,31 @@ class _TimerDialState extends State<TimerDial> {
     TimerMode.shortBreak: 5 * 60,
   };
 
-  late int _remainingSeconds = _initialSeconds[widget.timerMode]!;
+  late TimerMode _timerMode;
+
+  late int _remainingSeconds;
 
   Timer? _timer;
 
   @override
   void initState() {
     super.initState();
+
+    _timerMode = TimerMode.work;
+    _setRemainingSeconds();
+
     startTimer();
+  }
+
+  void _setRemainingSeconds() {
+    _remainingSeconds = _initialSeconds[_timerMode]!;
   }
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(oneSec, (Timer timer) {
       if (_remainingSeconds == 0) {
-        timer.cancel();
+        endTimer();
       } else {
         setState(() {
           _remainingSeconds--;
@@ -62,5 +70,22 @@ class _TimerDialState extends State<TimerDial> {
   void dispose() {
     _timer?.cancel();
     super.dispose();
+  }
+
+  void endTimer() {
+    // タイマーのモードを切り替えて再スタート
+
+    _timer?.cancel();
+
+    if (_timerMode == TimerMode.work) {
+      _timerMode = TimerMode.shortBreak;
+    } else {
+      _timerMode = TimerMode.work;
+    }
+
+    _setRemainingSeconds();
+
+    setState(() {});
+    startTimer();
   }
 }
