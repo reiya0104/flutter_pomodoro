@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pomodoro/models/timer_mode.dart';
 import 'package:flutter_pomodoro/widgets/timer_dial.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,9 +8,7 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TimerDial(
-            timerMode: TimerMode.work,
-          ),
+          home: TimerDial(),
         ),
       );
       expect(find.text('25:00'), findsOneWidget);
@@ -21,9 +18,7 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TimerDial(
-            timerMode: TimerMode.work,
-          ),
+          home: TimerDial(),
         ),
       );
       await tester.pump(const Duration(seconds: 1));
@@ -34,24 +29,47 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TimerDial(
-            timerMode: TimerMode.work,
-          ),
+          home: TimerDial(),
         ),
       );
       await tester.pump(const Duration(minutes: 25));
       expect(find.text('00:00'), findsOneWidget);
     });
 
-    testWidgets('should display 05:00 initially in short break mode',
+    testWidgets(
+        'should display 05:00 after 25 minutes and 1 second in work mode, then transisting to short break mode',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TimerDial(timerMode: TimerMode.shortBreak),
+          home: TimerDial(),
         ),
       );
-
+      await tester.pump(const Duration(minutes: 25, seconds: 1));
       expect(find.text('05:00'), findsOneWidget);
+    });
+
+    testWidgets(
+        'should display 00:00 after 30 minutes and 1 second in work mode, then transisting to short break mode',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: TimerDial(),
+        ),
+      );
+      await tester.pump(const Duration(minutes: 30, seconds: 1));
+      expect(find.text('00:00'), findsOneWidget);
+    });
+
+    testWidgets(
+        'should display 25:00 after 30 minutes and 2 second in work mode, then transisting to work mode',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: TimerDial(),
+        ),
+      );
+      await tester.pump(const Duration(minutes: 30, seconds: 2));
+      expect(find.text('25:00'), findsOneWidget);
     });
   });
 }
