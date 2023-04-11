@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pomodoro/models/timer_loop.dart';
 import 'package:flutter_pomodoro/models/timer_mode.dart';
@@ -13,21 +14,45 @@ class Clock extends StatefulWidget {
 
 class _ClockState extends State<Clock> {
   late TimerLoop _timerLoop;
+  final AudioPlayer audioPlayer = AudioPlayer();
+
+  // タイマーのコールバック内での処理
+  Future<void> _handleTimerTick() async {
+    if (_timerLoop.remainingSeconds == 1) {
+      // タイマーの表示が 0 になったと同時にアラームがなるようにする
+      // 5秒間だけアラーム音を再生
+      await audioPlayer.resume();
+
+      // 5秒後にアラーム音を停止
+      Future.delayed(const Duration(seconds: 5), () {
+        audioPlayer.stop();
+      });
+    }
+
+    if (_timerLoop.remainingSeconds == 0) {
+      // 残り時間が0になったらタイマーをリスタート
+      _timerLoop.switchAndRestart();
+    } else {
+      setState(() {
+        _timerLoop.decrementRemainingSeconds();
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
 
+    // AudioPlayerの初期設定
+    Future(() async {
+      await audioPlayer.setSourceAsset("sounds/alert_se.mp3");
+      setState(() {});
+    });
+
     _timerLoop = TimerLoop(
         timerMode: TimerMode.work,
         onTick: () {
-          if (_timerLoop.remainingSeconds == 0) {
-            _timerLoop.switchAndRestart();
-          } else {
-            setState(() {
-              _timerLoop.decrementRemainingSeconds();
-            });
-          }
+          _handleTimerTick();
         },
         onEnd: () {
           setState(() {});
