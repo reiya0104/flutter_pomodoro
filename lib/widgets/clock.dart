@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pomodoro/models/alarm.dart';
 import 'package:flutter_pomodoro/models/timer_loop.dart';
 import 'package:flutter_pomodoro/models/timer_mode.dart';
 import 'package:flutter_pomodoro/widgets/dounut_chart/dount_timer.dart';
@@ -13,21 +14,35 @@ class Clock extends StatefulWidget {
 
 class _ClockState extends State<Clock> {
   late TimerLoop _timerLoop;
+  late final Alarm alarm = Alarm();
+
+  // タイマーのコールバック内での処理
+  Future<void> _handleTimerTick() async {
+    if (_timerLoop.remainingSeconds == 1) {
+      // タイマーの表示が 0 になったと同時にアラームがなるようにする
+      alarm.call();
+    }
+
+    if (_timerLoop.remainingSeconds == 0) {
+      // 残り時間が0になったらタイマーをリスタート
+      _timerLoop.switchAndRestart();
+    } else {
+      setState(() {
+        _timerLoop.decrementRemainingSeconds();
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
 
+    alarm.init();
+
     _timerLoop = TimerLoop(
         timerMode: TimerMode.work,
         onTick: () {
-          if (_timerLoop.remainingSeconds == 0) {
-            _timerLoop.switchAndRestart();
-          } else {
-            setState(() {
-              _timerLoop.decrementRemainingSeconds();
-            });
-          }
+          _handleTimerTick();
         },
         onEnd: () {
           setState(() {});
