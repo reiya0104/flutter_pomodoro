@@ -45,7 +45,7 @@ class _ClockState extends State<Clock> {
 
     // AudioPlayerの初期設定
     Future(() async {
-      await audioPlayer.setSourceAsset("sounds/alert_se.mp3");
+      await audioPlayer.setSourceAsset("sounds/alarm_se.mp3");
       setState(() {});
     });
 
